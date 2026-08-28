@@ -1,0 +1,31 @@
+{
+  "name": "mini_gemini_cli",
+  "version": "1.0.0",
+  "description": "This is a miniture CLI of gemini ,this project is to understand the actual gemini CLI to contribute to the open source project .",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx src/cli.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanaelmbale/mini_gemini_CLI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/nathanaelmbale/mini_gemini_CLI/issues"
+  },
+  "homepage": "https://github.com/nathanaelmbale/mini_gemini_CLI#readme",
+  "dependencies": {
+    "@google/genai": "^2.19.0",
+    "dotenv": "^17.4.2",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.0"
+  }
+}
