@@ -1,5 +1,5 @@
 # mini-agent
-
+![alt text](image.png)
 A miniature terminal-based AI coding agent, built from scratch in TypeScript to understand how tools like [Gemini CLI](https://github.com/google-gemini/gemini-cli) actually work under the hood — agent loops, tool calling, permissions, context management — before contributing to the real thing.
 
 This isn't meant to compete with Gemini CLI. It's a deliberately small reimplementation of its core ideas, built one concept at a time, so that reading the real codebase later feels like recognizing familiar patterns instead of decoding unfamiliar architecture.

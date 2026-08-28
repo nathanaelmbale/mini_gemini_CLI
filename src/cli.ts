@@ -9,7 +9,8 @@ import { compressHistoryIfNeeded } from "../context/compress.js";
 import type { ChatMessage } from "./types.js";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { cyan, green, yellow, magenta, dim, bold } from "./ui/colors.js";
+import { cyan, yellow, green, magenta, dim, box } from "./ui/colors.js";
+import { renderBanner, renderFooter } from "./ui/banner.js";
 
 
 function parseArgs(argv: string[]): { message?: string; filePath?: string } {
@@ -63,10 +64,16 @@ async function main() {
             return; // one-shot done — falls through to finally below
         }
 
-        console.log(cyan(bold("\n✦ mini-agent")) + dim(" — type your message, or /exit to quit\n"));
+        console.log("\n" + renderBanner() + "\n");
+        console.log(dim("Tips for getting started:"));
+        console.log(dim("1. Ask questions, edit files, or run commands."));
+        console.log(dim("2. Be specific for the best results."));
+        console.log(dim("3. /help for more information.\n"));
+        console.log(renderFooter() + "\n");
+        // console.log(cyan(bold("\n✦ mini-agent")) + dim(" — type your message, or /exit to quit\n"));
 
         while (true) {
-            const userInput = await rl.question(cyan("> "));
+            const userInput = await rl.question(yellow("> "));
 
             if (userInput.trim() === "/exit") {
                 break;
@@ -128,6 +135,14 @@ async function handleTurn(ai: GoogleGenAI, history: Array<ChatMessage>, rl: read
                     result = `Error: ${(err as Error).message}`;
                 }
             }
+
+            console.log(
+                box(
+                    green(`✓ ${call.name}`) + dim(` ${JSON.stringify(call.args)}`),
+                    [dim(result.slice(0, 200))], // truncate long results so the box stays reasonable
+                ),
+            )
+
 
             const modelTurn = response.candidates?.[0]?.content;
             if (!modelTurn) {

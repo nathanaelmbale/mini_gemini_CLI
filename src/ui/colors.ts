@@ -26,3 +26,14 @@ export function dim(text: string): string {
 export function bold(text: string): string {
   return `\x1b[1m${text}${RESET}`;
 }
+
+export function box(title: string, lines: string[]): string {
+  const content = [title, "", ...lines];
+  const width = Math.max(...content.map((l) => l.length)) + 2;
+
+  const top = `┌${"─".repeat(width)}┐`;
+  const bottom = `└${"─".repeat(width)}┘`;
+  const body = content.map((l) => `│ ${l.padEnd(width - 1)}│`).join("\n");
+
+  return `${top}\n${body}\n${bottom}`;
+}
